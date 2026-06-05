@@ -1,0 +1,547 @@
+/* Reset & Base System Styles */
+* {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    user-select: none; /* Prevents text highlighting to mimic a real OS desktop */
+}
+
+body {
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+/* Desktop Canvas Area */
+.desktop {
+    flex: 1;
+    position: relative;
+    padding: 20px;
+
+    /* 👇 COPY AND PASTE THIS UPDATED IMAGE LINK 👇 */
+    background-image: url('/image/imgi_29_24975.jpg');
+
+    background-size: cover; 
+    background-position: center center; 
+    background-repeat: no-repeat; 
+
+    /* Keep rendering optimized and sharp */
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+}
+
+
+/* Sidebar Navigation */
+.desktop-icons {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    width: max-content;
+}
+
+.icon-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    width: 75px;
+    padding: 6px;
+    border-radius: 4px;
+    transition: background 0.2s, transform 0.1s;
+}
+
+/* Hover effect resembling desktop icon selection */
+.icon-item:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: scale(1.02);
+}
+
+.icon-item i {
+    font-size: 26px;
+    margin-bottom: 6px;
+}
+
+.icon-item span {
+    color: #ffffff;
+    font-size: 11px;
+    text-align: center;
+    font-weight: 400;
+    /* Ensures text stands out clearly against any background image */
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8), 0 0 1px rgba(0, 0, 0, 0.9);
+}
+
+/* Icon Colors mapping to your original screenshot */
+.icon-blue { color: #52b1ff; }
+.icon-yellow { color: #ffd32a; }
+.icon-purple { color: #c56cf0; }
+.icon-green { color: #32ff7e; }
+.icon-orange { color: #ff9f43; }
+
+/* Translucent Bottom Taskbar */
+.taskbar {
+    height: 48px;
+    width: 100%;
+    background: rgba(18, 18, 18, 0.8);
+    /* Frosted glass effect */
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 12px;
+    z-index: 999;
+}
+
+/* Taskbar Left: Windows Elements */
+.taskbar-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    height: 100%;
+}
+
+.start-btn {
+    background: transparent;
+    border: none;
+    color: #38ef7d; /* Distinct accent color for the start icon */
+    font-size: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 36px;
+    width: 36px;
+    border-radius: 4px;
+    transition: background 0.2s;
+}
+
+.start-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* Mock Windows Search Bar */
+.search-container {
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 4px;
+    height: 32px;
+    width: 160px;
+    padding: 0 10px;
+}
+
+.search-icon {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 14px;
+    margin-right: 8px;
+}
+
+.search-input {
+    background: transparent;
+    border: none;
+    outline: none;
+    color: #ffffff;
+    font-size: 12px;
+    width: 100%;
+    cursor: default;
+}
+
+.search-input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+/* Taskbar Right: System Tray & Clock */
+.taskbar-right {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 14px;
+}
+
+.taskbar-right i:hover {
+    color: #ffffff;
+    cursor: pointer;
+}
+
+.time-date {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    font-size: 11px;
+    border-left: 1px solid rgba(255, 255, 255, 0.15);
+    padding-left: 12px;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.date {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 10px;
+    margin-top: 1px;
+}
+ 
+/* --- 1. FIXED DESKTOP APPLICATION WINDOW --- */
+.os-window {
+    position: absolute;
+    /* Positions the window right next to your sidebar icons */
+    top: 30px;
+    left: 120px;
+    
+    /* Dynamically fills the remaining desktop space without pushing past it */
+    width: calc(100% - 150px);  
+    height: calc(100% - 100px); 
+    
+    /* Safety caps: stops the window from getting ridiculously huge on massive screens */
+    max-width: 750px;
+    max-height: 450px;
+    
+    /* Premium frosted glass panel look */
+    background: rgba(25, 25, 28, 0.75); 
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 12px;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
+    z-index: 100;
+    
+    /* Checkbox toggle states */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: transform 0.25s ease, opacity 0.25s, visibility 0.25s;
+    
+    /* CRITICAL: Stops any rogue text or image from leaking out of the box */
+    overflow: hidden; 
+}
+
+/* Kicks off entrance when icon is clicked */
+.window-toggle-check:checked ~ #about-window {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+/* --- 2. INTERNAL SCROLLABLE GRID --- */
+.about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.3fr;
+    gap: 24px;
+    padding: 24px;
+    height: calc(100% - 44px);
+    box-sizing: border-box;
+    
+    /* 👇 THE ULTIMATE FIX: If the text stretches too long, 
+       it creates a scrollbar INSIDE the app window, NOT on your main desktop! */
+    overflow-y: auto; 
+}
+
+/* Ensure picture frame is responsive */
+.profile-frame {
+    width: 100%;
+    height: 100%;
+    min-height: 180px;
+    max-height: 250px;
+    border-radius: 8px;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.profile-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* --- 3. THE SKINNY WINDOW FIX --- */
+@media (max-width: 650px) {
+    .about-grid {
+        grid-template-columns: 1fr; /* Stacks image on top of text when skinny */
+        gap: 16px;
+        padding: 16px;
+    }
+    
+    .profile-frame {
+        height: 140px;
+    }
+}
+/* --- 2. KEYFRAME DEFINITIONS --- */
+@keyframes slideFromLeft {
+    from { opacity: 0; transform: translateX(-40px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slideFromRight {
+    from { opacity: 0; transform: translateX(40px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes floatFromBottom {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- 3. TRIGGER SECTIONS --- */
+.window-toggle-check:checked ~ #about-window {
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1);
+}
+
+/* Kicks off entrance movements in clean sequences when box is checked */
+.window-toggle-check:checked ~ #about-window .about-left {
+    animation: slideFromLeft 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+    animation-delay: 0.1s;
+}
+
+.window-toggle-check:checked ~ #about-window .about-right h2,
+.window-toggle-check:checked ~ #about-window .about-right p {
+    animation: slideFromRight 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+    animation-delay: 0.2s;
+}
+
+.window-toggle-check:checked ~ #about-window .tech-stack {
+    animation: floatFromBottom 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+    animation-delay: 0.35s; 
+}
+
+/* Hide elements initial loading states */
+.about-left, .about-right h2, .about-right p, .tech-stack {
+    opacity: 0;
+}
+
+/* --- 4. DETAILS & COSMETICS --- */
+.profile-frame {
+    width: 100%;
+    height: 230px;
+    border-radius: 8px;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.profile-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.about-right h2 {
+    color: #ffffff;
+    font-size: 22px;
+    margin-bottom: 12px;
+}
+
+.about-right p {
+    color: rgba(255, 255, 255, 0.75);
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 25px;
+}
+
+.tech-stack { display: flex; gap: 15px; }
+.logo-item { font-size: 32px; transition: transform 0.2s; }
+.logo-item:hover { transform: translateY(-4px); }
+.html { color: #e34f26; }
+.css { color: #1572b6; }
+.js { color: #f7df1e; }
+
+/* Header Layout System */
+.window-header {
+    background: rgba(18, 18, 20, 0.85);
+    padding: 12px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+.window-dots { display: flex; gap: 6px; }
+.dot { width: 10px; height: 10px; border-radius: 50%; }
+.red { background: #ff5f56; }
+.yellow { background: #ffbd2e; }
+.green { background: #27c93f; }
+.window-title { color: rgba(255, 255, 255, 0.5); font-size: 11px; }
+.close-btn { color: rgba(255, 255, 255, 0.6); cursor: pointer; font-size: 16px; }
+.close-btn:hover { color: #ff5f56; }
+
+/* This forces the browser to hide the mechanical checkbox completely */
+input[type="checkbox"].window-toggle-check {
+    display: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    position: absolute !important;
+    pointer-events: none !important;
+}
+
+
+/* --- PROJECTS WINDOW STATE SYSTEM --- */
+#projects-window {
+    position: absolute;
+    top: 30px;
+    left: 120px;
+    width: calc(100% - 150px);  
+    height: calc(100% - 100px); 
+    max-width: 800px;
+    max-height: 450px;
+    
+    background: rgba(25, 25, 28, 0.75); 
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 12px;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
+    z-index: 101; /* Slightly higher than about window to sit on top if both open */
+    
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: transform 0.25s ease, opacity 0.25s, visibility 0.25s;
+    overflow: hidden;
+}
+
+/* Open action rule tied to the checkbox hidden trigger */
+.window-toggle-check:checked ~ #projects-window {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+/* --- NETFLIX SYSTEM CONTAINER --- */
+.netflix-container {
+    padding: 24px;
+    color: #ffffff;
+    height: calc(100% - 44px);
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.carousel-title {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    letter-spacing: 0.5px;
+    text-align: left;
+}
+
+/* The Horizontal Scrolling Track */
+.netflix-row {
+    display: flex;
+    gap: 30px;
+    overflow-x: auto; /* Enables native horizontal scrolling swipe/drag */
+    overflow-y: hidden;
+    padding: 20px 10px 30px 40px; /* Left padding provides extra space for card #1's massive number */
+    scroll-behavior: smooth;
+}
+
+/* --- THE LAYERED NUMBER CARDS (Z-INDEX MIX) --- */
+.netflix-card {
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    flex: 0 0 160px; /* Lock standard static width card size so columns don't crush */
+    height: 240px;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.3s ease;
+}
+
+/* The Massive Layered Number Behind the Card Image */
+.card-number {
+    font-size: 160px;
+    font-weight: 900;
+    line-height: 1;
+    position: absolute;
+    left: -35px;
+    bottom: -25px;
+    z-index: 1; /* Sits completely behind picture wrapper */
+    color: #111113;
+    text-shadow: 
+        -1px -1px 0 rgba(255, 255, 255, 0.3),  
+         1px -1px 0 rgba(255, 255, 255, 0.3),
+        -1px  1px 0 rgba(255, 255, 255, 0.3),
+         1px  1px 0 rgba(255, 255, 255, 0.3); /* Premium transparent stroke outlines */
+    user-select: none;
+}
+
+/* Picture Canvas Window Box */
+.card-image-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 6px;
+    overflow: hidden;
+    z-index: 2; /* Sits safely on top of number layer */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+    background: #18181b;
+}
+
+.card-image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+/* Dark Information Slide Overlay */
+.card-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.95) 40%, rgba(0, 0, 0, 0));
+    padding: 16px 12px;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.card-overlay h3 {
+    font-size: 14px;
+    margin-bottom: 4px;
+    color: #ffffff;
+}
+
+.card-overlay p {
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.4;
+}
+
+/* --- PREMIUM CARD HOVER ANIMATIONS --- */
+.netflix-card:hover {
+    transform: scale(1.05);
+}
+
+.netflix-card:hover .card-image-wrapper img {
+    transform: scale(1.1); /* Subtle magnification effect on poster */
+}
+
+.netflix-card:hover .card-overlay {
+    opacity: 1;
+    transform: translateY(0); /* Pop text up into view smoothly */
+}
+
+/* --- STYLING THE SCROLLBAR INSIDE APP --- */
+.netflix-row::-webkit-scrollbar {
+    height: 6px;
+}
+.netflix-row::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+}
+.netflix-row::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+}
+.netflix-row::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.4);
+}
