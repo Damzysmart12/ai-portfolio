@@ -21,12 +21,15 @@ body {
     flex: 1;
     position: relative;
     padding: 20px;
-    background-image: url('/image/imgi_29_24975.jpg');
+    /* background-image: url('/image/imgi_29_24975.jpg'); */
     background-size: cover; 
     background-position: center center; 
     background-repeat: no-repeat; 
     image-rendering: -webkit-optimize-contrast;
     image-rendering: crisp-edges;
+    background: transparent;
+    z-index: 2;
+    transform: translateZ(0);
 }
 
 /* Sidebar Navigation */
@@ -471,4 +474,16 @@ input[type="checkbox"].window-toggle-check {
 .netflix-row::-webkit-scrollbar { height: 6px; }
 .netflix-row::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.05); border-radius: 10px; }
 .netflix-row::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.2); border-radius: 10px; }
-.netflix-row::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.4); }
+.netflix-row::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.4); } 
+  
+/* --- LIVE VIDEO BACKGROUND WALLPAPER --- */
+.desktop-video-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover; /* Forces video to scale perfectly without distorting */
+    z-index: -1; /* Keeps it locked at the absolute bottom layer */
+    pointer-events: none; /* Allows you to click "through" the video onto icons */
+}
