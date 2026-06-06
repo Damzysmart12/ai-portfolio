@@ -10,6 +10,7 @@
 
 body {
     height: 100vh;
+    height: 100dvh;
     width: 100vw;
     overflow: hidden;
     display: flex;
@@ -483,6 +484,7 @@ input[type="checkbox"].window-toggle-check {
     left: 0;
     width: 100vw;
     height: 100vh;
+    height: 100dvh;
     object-fit: cover; /* Forces video to scale perfectly without distorting */
     z-index: -1; /* Keeps it locked at the absolute bottom layer */
     pointer-events: none; /* Allows you to click "through" the video onto icons */
