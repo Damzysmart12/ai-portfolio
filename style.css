@@ -16,7 +16,7 @@ body {
     flex-direction: column;
 }
 
-/* Desktop Canvas Area */
+
 .desktop {
     flex: 1;
     position: relative;
