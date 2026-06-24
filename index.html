@@ -51,13 +51,22 @@ img{
     /* width: 800px; */
     bottom: 5rem;
     color: white;
-    
-    left: 46rem;
-    
-    
-    
+    width: 100%;
+    overflow: hidden;
+    /* left: 46rem; */
     
     
+    
+    
+    
+}
+marquee{
+   position: absolute;
+    /* width: 800px; */
+    bottom: 5rem;
+    color: white;
+    overflow: hidden;
+    /* left: 46rem; */ 
 }
 
 video{
@@ -76,7 +85,16 @@ video{
     right: 0;
     /* width: 100%; */
     text-align: center;
+    overflow: hidden;
     }
+    marquee{
+   position: absolute;
+    /* width: 800px; */
+    bottom: 5rem;
+    color: white;
+    overflow: hidden;
+    /* left: 46rem; */ 
+}
 }
 
 @media (min-width: 481px) and (max-width: 768px) {
@@ -85,8 +103,17 @@ video{
           bottom: 7rem;
     color: white;
    left: 11rem;
+   overflow: hidden;
     /* width: 400px; */
     }
+       marquee{
+   position: absolute;
+    /* width: 800px; */
+    bottom: 5rem;
+    color: white;
+    overflow: hidden;
+    /* left: 46rem; */ 
+}
 }
 @media (min-width: 769px) and (max-width: 1279px) {
     .click{
@@ -94,8 +121,17 @@ video{
           bottom: 7rem;
     color: white;
     left: 19rem;
+    overflow: hidden;
     /* width: 400px; */
     }
+       marquee{
+   position: absolute;
+    /* width: 800px; */
+    bottom: 5rem;
+    color: white;
+    overflow: hidden;
+    /* left: 46rem; */ 
+}
   
 }
  
@@ -106,8 +142,8 @@ video{
         <a href="/start.html"> <video autoplay muted  src="/video/portfolio.mp4"></video></a>
  
     </div>
-    <div class="click">
-         <marquee behavior="CLICK ANYWHERE TO CONTINUE" direction="right></marquee>
+    <!-- <div class="click"> -->
+        <marquee behavior=""  direction="left">CLICK ANYWHERE TO CONTINUE</marquee>
     </div>
 </body>
 </html>
