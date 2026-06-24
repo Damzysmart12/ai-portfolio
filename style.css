@@ -2,16 +2,15 @@
 * {
     margin: 0;
     padding: 0;
-    overflow: hidden;
     box-sizing: border-box;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    user-select: none; 
+    user-select: none; /* Prevents text highlighting to mimic a real OS desktop */
 }
 
 body {
     height: 100vh;
-    height: 100dvh;
     width: 100vw;
+    height: 100dvh;
     overflow: hidden;
     display: flex;
     flex-direction: column;
@@ -22,16 +21,19 @@ body {
     flex: 1;
     position: relative;
     padding: 20px;
-    /* background-image: url('/image/imgi_29_24975.jpg'); */
+
+    /* 👇 COPY AND PASTE THIS UPDATED IMAGE LINK 👇 */
+    background-image: url('/image/avatar.jpg.webp');
+
     background-size: cover; 
     background-position: center center; 
     background-repeat: no-repeat; 
+
+    /* Keep rendering optimized and sharp */
     image-rendering: -webkit-optimize-contrast;
     image-rendering: crisp-edges;
-    background: transparent;
-    z-index: 2;
-    transform: translateZ(0);
 }
+
 
 /* Sidebar Navigation */
 .desktop-icons {
@@ -50,9 +52,9 @@ body {
     padding: 6px;
     border-radius: 4px;
     transition: background 0.2s, transform 0.1s;
-    cursor: pointer;
 }
 
+/* Hover effect resembling desktop icon selection */
 .icon-item:hover {
     background: rgba(255, 255, 255, 0.15);
     transform: scale(1.02);
@@ -68,10 +70,11 @@ body {
     font-size: 11px;
     text-align: center;
     font-weight: 400;
+    /* Ensures text stands out clearly against any background image */
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8), 0 0 1px rgba(0, 0, 0, 0.9);
 }
 
-/* Icon Colors */
+/* Icon Colors mapping to your original screenshot */
 .icon-blue { color: #52b1ff; }
 .icon-yellow { color: #ffd32a; }
 .icon-purple { color: #c56cf0; }
@@ -83,6 +86,7 @@ body {
     height: 48px;
     width: 100%;
     background: rgba(18, 18, 18, 0.8);
+    /* Frosted glass effect */
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     border-top: 1px solid rgba(255, 255, 255, 0.08);
@@ -93,6 +97,7 @@ body {
     z-index: 999;
 }
 
+/* Taskbar Left: Windows Elements */
 .taskbar-left {
     display: flex;
     align-items: center;
@@ -103,7 +108,7 @@ body {
 .start-btn {
     background: transparent;
     border: none;
-    color: #38ef7d; 
+    color: #38ef7d; /* Distinct accent color for the start icon */
     font-size: 20px;
     cursor: pointer;
     display: flex;
@@ -119,6 +124,7 @@ body {
     background: rgba(255, 255, 255, 0.1);
 }
 
+/* Mock Windows Search Bar */
 .search-container {
     display: flex;
     align-items: center;
@@ -143,13 +149,14 @@ body {
     color: #ffffff;
     font-size: 12px;
     width: 100%;
-    cursor: default;
+    cursor: pointer;
 }
 
 .search-input::placeholder {
     color: rgba(255, 255, 255, 0.5);
 }
 
+/* Taskbar Right: System Tray & Clock */
 .taskbar-right {
     display: flex;
     align-items: center;
@@ -177,315 +184,4 @@ body {
     color: rgba(255, 255, 255, 0.5);
     font-size: 10px;
     margin-top: 1px;
-}
- 
-/* --- MAIN OS APPLICATION WINDOW --- */
-.os-window {
-    position: absolute;
-    top: 30px;
-    left: 120px;
-    width: calc(100% - 150px);  
-    height: calc(100% - 100px); 
-    max-width: 750px;
-    max-height: 450px;
-    background: rgba(25, 25, 28, 0.75); 
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    border-radius: 12px;
-    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
-    
-    /* Display: none handles perfect hiding without ghost shadows */
-    display: none; 
-    opacity: 0;
-    transform: translateY(10px);
-    transition: transform 0.25s ease, opacity 0.25s;
-    overflow: hidden; 
-}
-
-/* --- CHOSEN SWITCHES TO SHOW SEPARATE WINDOWS --- */
-#about-toggle:checked ~ #about-window {
-    display: block;
-    opacity: 1;
-    transform: translateY(0);
-    z-index: 100;
-}
-
-#projects-toggle:checked ~ #projects-window {
-    display: block;
-    opacity: 1;
-    transform: translateY(0);
-    z-index: 105; /* Sits on top if both open */
-}
-
-/* --- ABOUT WINDOW CONTENT GRID --- */
-.about-grid {
-    display: grid;
-    grid-template-columns: 1fr 1.3fr;
-    gap: 24px;
-    padding: 24px;
-    height: calc(100% - 44px);
-    box-sizing: border-box;
-    overflow-y: auto; 
-}
-
-.profile-frame {
-    width: 100%;
-    height: 230px;
-    border-radius: 8px;
-    overflow: hidden;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.profile-frame img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.about-right h2 {
-    color: #ffffff;
-    font-size: 22px;
-    margin-bottom: 12px;
-}
-
-.about-right p {
-    color: rgba(255, 255, 255, 0.75);
-    font-size: 14px;
-    line-height: 1.6;
-    margin-bottom: 25px;
-}
-
-.tech-stack { 
-    display: flex; 
-    gap: 15px; 
-}
-
-.logo-item { 
-    font-size: 32px; 
-    transition: transform 0.2s; 
-}
-
-.logo-item:hover { 
-    transform: translateY(-4px); 
-}
-
-.html { color: #e34f26; }
-.css { color: #1572b6; }
-.js { color: #f7df1e; }
-
-/* --- ABOUT ANIMATIONS --- */
-@keyframes slideFromLeft {
-    from { opacity: 0; transform: translateX(-40px); }
-    to { opacity: 1; transform: translateX(0); }
-}
-
-@keyframes slideFromRight {
-    from { opacity: 0; transform: translateX(40px); }
-    to { opacity: 1; transform: translateX(0); }
-}
-
-@keyframes floatFromBottom {
-    from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-/* Fixed Targeting Rule (Bypasses global class overwrite bug) */
-#about-toggle:checked ~ #about-window .about-left {
-    animation: slideFromLeft 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
-    animation-delay: 0.1s;
-}
-
-#about-toggle:checked ~ #about-window .about-right h2,
-#about-toggle:checked ~ #about-window .about-right p {
-    animation: slideFromRight 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
-    animation-delay: 0.2s;
-}
-
-#about-toggle:checked ~ #about-window .tech-stack {
-    animation: floatFromBottom 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
-    animation-delay: 0.35s; 
-}
-
-/* Initial loading opacity states specifically inside the about window */
-#about-window .about-left, 
-#about-window .about-right h2, 
-#about-window .about-right p, 
-#about-window .tech-stack {
-    opacity: 0;
-}
-
-/* --- PROJECTS APPLICATION WINDOW UNIQUE STYLES --- */
-#projects-window {
-    max-width: 800px;
-    max-height: 450px;
-}
-
-.netflix-container {
-    padding: 24px;
-    color: #ffffff;
-    height: calc(100% - 44px);
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.carousel-title {
-    font-size: 20px;
-    font-weight: 600;
-    margin-bottom: 20px;
-    letter-spacing: 0.5px;
-    text-align: left;
-}
-
-.netflix-row {
-    display: flex;
-    gap: 30px;
-    overflow-x: auto; 
-    overflow-y: hidden;
-    padding: 20px 10px 30px 40px; 
-    scroll-behavior: smooth;
-}
-
-.netflix-card {
-    position: relative;
-    display: flex;
-    align-items: flex-end;
-    flex: 0 0 160px; 
-    height: 240px;
-    text-decoration: none;
-    color: inherit;
-    transition: transform 0.3s ease;
-}
-
-.card-number {
-    font-size: 160px;
-    font-weight: 900;
-    line-height: 1;
-    position: absolute;
-    left: -35px;
-    bottom: -25px;
-    z-index: 1; 
-    color: #111113;
-    text-shadow: 
-        -1px -1px 0 rgba(255, 255, 255, 0.3),  
-         1px -1px 0 rgba(255, 255, 255, 0.3),
-        -1px  1px 0 rgba(255, 255, 255, 0.3),
-         1px  1px 0 rgba(255, 255, 255, 0.3); 
-    user-select: none;
-}
-
-.card-image-wrapper {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    border-radius: 6px;
-    overflow: hidden;
-    z-index: 2; 
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
-    background: #18181b;
-}
-
-.card-image-wrapper img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.4s ease;
-}
-
-.card-overlay {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.95) 40%, rgba(0, 0, 0, 0));
-    padding: 16px 12px;
-    opacity: 0;
-    transform: translateY(10px);
-    transition: opacity 0.3s ease, transform 0.3s ease;
-}
-
-.card-overlay h3 {
-    font-size: 14px;
-    margin-bottom: 4px;
-    color: #ffffff;
-}
-
-.card-overlay p {
-    font-size: 11px;
-    color: rgba(255, 255, 255, 0.7);
-    line-height: 1.4;
-}
-
-.netflix-card:hover {
-    transform: scale(1.05);
-}
-
-.netflix-card:hover .card-image-wrapper img {
-    transform: scale(1.1); 
-}
-
-.netflix-card:hover .card-overlay {
-    opacity: 1;
-    transform: translateY(0); 
-}
-
-/* --- COMMON APP INTERFACES & COSMETICS --- */
-.window-header {
-    background: rgba(18, 18, 20, 0.85);
-    padding: 12px 16px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-}
-.window-dots { display: flex; gap: 6px; }
-.dot { width: 10px; height: 10px; border-radius: 50%; }
-.red { background: #ff5f56; }
-.yellow { background: #ffbd2e; }
-.green { background: #27c93f; }
-.window-title { color: rgba(255, 255, 255, 0.5); font-size: 11px; }
-.close-btn { color: rgba(255, 255, 255, 0.6); cursor: pointer; font-size: 16px; }
-.close-btn:hover { color: #ff5f56; }
-
-/* Global Checkbox Remover */
-input[type="checkbox"].window-toggle-check {
-    display: none !important;
-    opacity: 0 !important;
-    visibility: hidden !important;
-    position: absolute !important;
-    pointer-events: none !important;
-}
-
-/* Responsive Window Stacking */
-@media (max-width: 650px) {
-    .about-grid {
-        grid-template-columns: 1fr; 
-        gap: 16px;
-        padding: 16px;
-    }
-    .profile-frame {
-        height: 140px;
-    }
-}
-
-/* Custom Scrollbars */
-.netflix-row::-webkit-scrollbar { height: 6px; }
-.netflix-row::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.05); border-radius: 10px; }
-.netflix-row::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.2); border-radius: 10px; }
-.netflix-row::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.4); } 
-  
-/* --- LIVE VIDEO BACKGROUND WALLPAPER --- */
-.desktop-video-bg {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    height: 100dvh;
-    object-fit: cover; /* Forces video to scale perfectly without distorting */
-    z-index: -1; /* Keeps it locked at the absolute bottom layer */
-    pointer-events: none; /* Allows you to click "through" the video onto icons */
 }
